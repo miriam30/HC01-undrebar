@@ -77,7 +77,6 @@
         result = index;
       }
     });
-
     return result;
   };
 
@@ -85,7 +84,7 @@
   _.filter = function(collection, test) {
     var result = [];
     for(var i = 0; i < collection.length; i++){
-      if(collection[i] %2 === test){
+      if(test(collection[i])){
         result.push(collection[i])
       }
     }
@@ -97,10 +96,23 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    var rejects = [];
+    for(var i =0; i< collection.length; i++){
+      if(test(collection[i]) === false){
+        rejects.push(collection[i])
+      }
+    }
+    return rejects
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    for(var i = 0; i < array.length; i++){
+      if(!array.hasOwnProperty(array[i])){
+        delete array[i]
+      }
+    }
+    return array
   };
 
 
